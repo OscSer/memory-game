@@ -1,3 +1,10 @@
+import { useUserState } from '../../contexts/user-context/UserContext';
+
 export function Board() {
-  return <h1>board</h1>;
+  const userState = useUserState();
+  return (
+    <h1>
+      board: {userState.nickname} {userState.numberOfCards}
+    </h1>
+  );
 }

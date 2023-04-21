@@ -2,22 +2,21 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import './SetupForm.css';
 import { MemoryLogo } from '../../components/memory-logo/MemoryLogo';
-
-interface FormData {
-  validated: boolean;
-  nickname: string;
-  numberOfCards: number;
-}
+import {
+  useUserDispatch,
+  useUserState,
+} from '../../contexts/user-context/UserContext';
+import { CardOptions } from '../../types/CardOptions';
 
 export function SetupForm() {
-  const [formData, setFormData] = useState<FormData>({
-    validated: false,
-    nickname: '',
-    numberOfCards: 12,
-  });
+  const navigate = useNavigate();
+  const userState = useUserState();
+  const userDispatch = useUserDispatch();
+  const [validated, setValidated] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
@@ -25,34 +24,47 @@ export function SetupForm() {
       event.preventDefault();
       event.stopPropagation();
     } else {
-      console.log('valid form!');
+      navigate('board');
     }
-    setFormData((data) => ({ ...data, validated: true }));
+    setValidated(true);
   };
 
   const onChangeNickname = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData((data) => ({ ...data, nickname: event.target.value }));
+      userDispatch({
+        type: 'update',
+        payload: { nickname: event.target.value },
+      });
     },
-    []
+    [userDispatch]
   );
 
   const onChangeCards = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
-      setFormData((data) => ({
-        ...data,
-        numberOfCards: parseInt(event.target.value, 10),
-      }));
+      userDispatch({
+        type: 'update',
+        payload: { numberOfCards: parseInt(event.target.value, 10) },
+      });
     },
-    []
+    [userDispatch]
   );
+
+  const getCardOptions = useCallback(() => {
+    const values = Object.values(CardOptions);
+    const numbers = values.filter((value) => !Number.isNaN(Number(value)));
+    return numbers.map((number) => (
+      <option key={number} value={number}>
+        {number}
+      </option>
+    ));
+  }, []);
 
   return (
     <>
       <MemoryLogo />
       <Form
         noValidate
-        validated={formData.validated}
+        validated={validated}
         onSubmit={handleSubmit}
         className="setupForm"
       >
@@ -61,7 +73,7 @@ export function SetupForm() {
             required
             type="text"
             placeholder="Nickname"
-            value={formData.nickname}
+            value={userState.nickname}
             onChange={onChangeNickname}
           />
           <Form.Control.Feedback type="invalid">
@@ -74,10 +86,8 @@ export function SetupForm() {
           label="Number of cards"
           className="mb-3"
         >
-          <Form.Select value={formData.numberOfCards} onChange={onChangeCards}>
-            <option value="8">8</option>
-            <option value="12">12</option>
-            <option value="20">20</option>
+          <Form.Select value={userState.numberOfCards} onChange={onChangeCards}>
+            {getCardOptions()}
           </Form.Select>
         </FloatingLabel>
 
