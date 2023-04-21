@@ -1,30 +1,98 @@
+import { useEffect, useRef, useState } from 'react';
+
+import './GameBoard.css';
+import { MemoizedCard } from '@components/card/Card';
 import { useUserState } from '@contexts/user-context/UserContext';
 import { useGetCards } from '@hooks/cards-query/useCardsQuery';
-import { useState } from 'react';
-
-type Counter = {
-  correct: number;
-  incorrect: number;
-};
+import { CardElement } from '@models/CardElement';
+import { CounterType } from '@models/CounterType';
+import { duplicateAndRandomizeCards } from './gameBoardUtils';
 
 export function GameBoard() {
   const user = useUserState();
-  const [counter, setCounter] = useState<Counter>({ correct: 0, incorrect: 0 });
-  const { isLoading, data: cards } = useGetCards(user.numberOfCards || 10);
+  const [cards, setCards] = useState<CardElement[]>([]);
+  const comparingRef = useRef(false);
+  const { isLoading, data } = useGetCards(user.numberOfCards / 2);
+  const selectedRef = useRef<CardElement[]>([]);
+  const [counter, setCounter] = useState<CounterType>({
+    successful: 0,
+    failed: 0,
+  });
+
+  useEffect(() => {
+    setCards(duplicateAndRandomizeCards(data));
+  }, [data]);
 
   if (isLoading) return <div>loading...</div>;
 
+  const setVisibility = (_cards: CardElement[], show: boolean) => {
+    const keys = _cards.map((item) => item.key);
+    setCards((prev) =>
+      prev.map((item) => (keys.includes(item.key) ? { ...item, show } : item))
+    );
+  };
+
+  const setMatchedCards = (_cards: CardElement[]) => {
+    const keys = _cards.map((item) => item.key);
+    setCards((prev) =>
+      prev.map((item) =>
+        keys.includes(item.key) ? { ...item, matched: true } : item
+      )
+    );
+  };
+
+  const successfulMatch = () => {
+    setCounter((prev) => ({ ...prev, correct: prev.successful + 1 }));
+    setMatchedCards(selectedRef.current);
+    comparingRef.current = false;
+    selectedRef.current = [];
+  };
+
+  const unsuccessfulMatch = () => {
+    setCounter((prev) => ({
+      ...prev,
+      incorrect: prev.failed + 1,
+    }));
+    setVisibility(selectedRef.current, false);
+    comparingRef.current = false;
+    selectedRef.current = [];
+  };
+
+  const compareCards = () => {
+    comparingRef.current = true;
+    if (selectedRef.current[0].uuid === selectedRef.current[1].uuid) {
+      successfulMatch();
+    } else {
+      setTimeout(unsuccessfulMatch, 1000);
+    }
+  };
+
+  const handleClick = (card: CardElement) => {
+    const isSelected = selectedRef.current.some(
+      (item) => item.key === card.key
+    );
+    if (card.matched || isSelected || comparingRef.current) return;
+
+    setVisibility([card], true);
+    selectedRef.current.push(card);
+    if (selectedRef.current.length === 2) compareCards();
+  };
+
   return (
-    <>
-      {user.nickname}
+    <div className="GameBoard">
+      <div>{user.nickname}</div>
       <div>
-        correct {counter.correct} - incorrect {counter.incorrect}
+        {counter.successful} / {counter.failed}
       </div>
-      <div>
-        {cards?.map((card) => (
-          <img key={card.uuid} src={card.url} alt={card.title} />
+      <div className="GameBoard__Cards">
+        {cards.map((card) => (
+          <MemoizedCard
+            key={card.key}
+            card={card}
+            onClick={() => handleClick(card)}
+          />
         ))}
       </div>
-    </>
+    </div>
   );
 }

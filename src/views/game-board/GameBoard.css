@@ -1,0 +1,12 @@
+.GameBoard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.GameBoard__Cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
