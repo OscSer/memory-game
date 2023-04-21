@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
@@ -5,24 +6,27 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import { SetupForm } from '@views/setup-form/SetupForm';
-import { Board } from '@views/board/Board';
-import { UserProvider } from '@contexts/user-context/UserContext';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import './main.css';
+import { SetupForm } from '@views/setup-form/SetupForm';
+import { UserProvider } from '@contexts/user-context/UserContext';
+import { GameBoard } from '@views/game-board/GameBoard';
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   { path: '/', element: <SetupForm /> },
-  { path: 'board', element: <Board /> },
+  { path: 'board', element: <GameBoard /> },
   { path: '*', element: <Navigate to="/" replace /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <UserProvider>
-      <RouterProvider router={router} />
-    </UserProvider>
+    <QueryClientProvider client={queryClient}>
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
