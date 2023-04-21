@@ -21,6 +21,7 @@
       "@components/*": ["./components/*"],
       "@contexts/*": ["./contexts/*"],
       "@models/*": ["./models/*"],
+      "@services/*": ["./services/*"],
       "@views/*": ["./views/*"]
     }
   },

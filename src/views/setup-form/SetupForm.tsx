@@ -4,13 +4,14 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import './SetupForm.css';
 import {
   useUserDispatch,
   useUserState,
 } from '@contexts/user-context/UserContext';
 import { MemoryLogo } from '@components/memory-logo/MemoryLogo';
 import { CardOptions } from '@models/CardOptions';
-import './SetupForm.css';
+import { setUserState } from '@services/storage-service/LocalStorageService';
 
 export function SetupForm() {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export function SetupForm() {
       event.preventDefault();
       event.stopPropagation();
     } else {
+      setUserState(userState);
       navigate('board');
     }
     setValidated(true);
@@ -73,6 +75,7 @@ export function SetupForm() {
             required
             type="text"
             placeholder="Nickname"
+            autoComplete="off"
             value={userState.nickname}
             onChange={onChangeNickname}
           />

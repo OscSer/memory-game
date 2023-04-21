@@ -3,6 +3,7 @@ import { CardOptions } from '@models/CardOptions';
 import { Provider } from '@models/Provider';
 import { UserAction } from '@models/UserAction';
 import { UserState } from '@models/UserState';
+import { getUserState } from '@services/storage-service/LocalStorageService';
 
 const initialState: UserState = {
   nickname: '',
@@ -23,7 +24,8 @@ function reducer(state: UserState, action: UserAction) {
 }
 
 export function UserProvider({ children }: Provider): JSX.Element {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const storedState = getUserState();
+  const [state, dispatch] = useReducer(reducer, storedState || initialState);
 
   return (
     <UserContext.Provider value={state}>
