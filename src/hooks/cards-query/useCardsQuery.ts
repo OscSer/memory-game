@@ -32,5 +32,7 @@ async function getCards(numberOfCards: number) {
 }
 
 export function useGetCards(numberOfCards: number) {
-  return useQuery(['cards', numberOfCards], () => getCards(numberOfCards));
+  return useQuery(['cards', numberOfCards], () => getCards(numberOfCards), {
+    refetchOnWindowFocus: false,
+  });
 }
