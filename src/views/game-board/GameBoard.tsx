@@ -6,6 +6,7 @@ import { useUserState } from '@contexts/user-context/UserContext';
 import { useGetCards } from '@hooks/cards-query/useCardsQuery';
 import { CardElement } from '@models/CardElement';
 import { CounterType } from '@models/CounterType';
+import { Loading } from '@components/loading/Loading';
 import { duplicateAndRandomizeCards } from './gameBoardUtils';
 
 export function GameBoard() {
@@ -23,7 +24,7 @@ export function GameBoard() {
     setCards(duplicateAndRandomizeCards(data));
   }, [data]);
 
-  if (isLoading) return <div>loading...</div>;
+  if (isLoading) return <Loading />;
 
   const setVisibility = (_cards: CardElement[], show: boolean) => {
     const keys = _cards.map((item) => item.key);

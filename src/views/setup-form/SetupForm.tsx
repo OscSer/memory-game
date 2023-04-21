@@ -97,7 +97,7 @@ export function SetupForm() {
           </Form.Select>
         </FloatingLabel>
 
-        <Button type="submit" variant="outline-primary">
+        <Button type="submit" variant="primary">
           Start
         </Button>
       </Form>
