@@ -22,5 +22,7 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'import/prefer-default-export': ['off', { target: 'single' }],
     'react/jsx-one-expression-per-line': [0, { allow: 'none' }],
+    'comma-dangle': 'off',
+    '@typescript-eslint/comma-dangle': 0,
   },
 };
