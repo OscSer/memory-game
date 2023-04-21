@@ -10,7 +10,7 @@ import {
   useUserState,
 } from '@contexts/user-context/UserContext';
 import { MemoryLogo } from '@components/memory-logo/MemoryLogo';
-import { CardOptions } from '@models/CardOptions';
+import { NumberOfCards } from '@models/NumberOfCards';
 import { setUserState } from '@services/storage-service/LocalStorageService';
 
 export function SetupForm() {
@@ -35,24 +35,27 @@ export function SetupForm() {
     (event: React.ChangeEvent<HTMLInputElement>) => {
       userDispatch({
         type: 'update',
-        payload: { nickname: event.target.value },
+        payload: { ...userState, nickname: event.target.value },
       });
     },
-    [userDispatch]
+    [userDispatch, userState]
   );
 
   const onChangeCards = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       userDispatch({
         type: 'update',
-        payload: { numberOfCards: parseInt(event.target.value, 10) },
+        payload: {
+          ...userState,
+          numberOfCards: parseInt(event.target.value, 10),
+        },
       });
     },
-    [userDispatch]
+    [userDispatch, userState]
   );
 
   const getCardOptions = useCallback(() => {
-    const values = Object.values(CardOptions);
+    const values = Object.values(NumberOfCards);
     const numbers = values.filter((value) => !Number.isNaN(Number(value)));
     return numbers.map((number) => (
       <option key={number} value={number}>

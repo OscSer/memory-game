@@ -1,4 +1,4 @@
 export type UserState = {
-  nickname?: string;
-  numberOfCards?: number;
+  nickname: string;
+  numberOfCards: number;
 };

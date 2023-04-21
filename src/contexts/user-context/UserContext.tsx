@@ -1,5 +1,5 @@
 import React, { Dispatch, useContext, useReducer } from 'react';
-import { CardOptions } from '@models/CardOptions';
+import { NumberOfCards } from '@models/NumberOfCards';
 import { Provider } from '@models/Provider';
 import { UserAction } from '@models/UserAction';
 import { UserState } from '@models/UserState';
@@ -7,7 +7,7 @@ import { getUserState } from '@services/storage-service/LocalStorageService';
 
 const initialState: UserState = {
   nickname: '',
-  numberOfCards: CardOptions.Medium,
+  numberOfCards: NumberOfCards.Medium,
 };
 const UserContext = React.createContext<UserState>(initialState);
 const UserDispatchContext = React.createContext<Dispatch<UserAction>>(() => {});
