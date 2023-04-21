@@ -7,9 +7,10 @@ import {
 } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Board } from './views/board/Board';
-import { SetupForm } from './views/setup-form/SetupForm';
-import { UserProvider } from './contexts/user-context/UserContext';
+import { SetupForm } from '@views/setup-form/SetupForm';
+import { Board } from '@views/board/Board';
+import { UserProvider } from '@contexts/user-context/UserContext';
+
 import './main.css';
 
 const router = createBrowserRouter([

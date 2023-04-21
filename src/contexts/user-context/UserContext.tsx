@@ -1,8 +1,8 @@
 import React, { Dispatch, useContext, useReducer } from 'react';
-import { CardOptions } from '../../types/CardOptions';
-import { Provider } from '../../types/Provider';
-import { UserAction } from '../../types/UserAction';
-import { UserState } from '../../types/UserState';
+import { CardOptions } from '@models/CardOptions';
+import { Provider } from '@models/Provider';
+import { UserAction } from '@models/UserAction';
+import { UserState } from '@models/UserState';
 
 const initialState: UserState = {
   nickname: '',

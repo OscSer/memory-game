@@ -4,13 +4,13 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import './SetupForm.css';
-import { MemoryLogo } from '../../components/memory-logo/MemoryLogo';
 import {
   useUserDispatch,
   useUserState,
-} from '../../contexts/user-context/UserContext';
-import { CardOptions } from '../../types/CardOptions';
+} from '@contexts/user-context/UserContext';
+import { MemoryLogo } from '@components/memory-logo/MemoryLogo';
+import { CardOptions } from '@models/CardOptions';
+import './SetupForm.css';
 
 export function SetupForm() {
   const navigate = useNavigate();

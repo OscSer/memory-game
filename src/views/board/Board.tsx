@@ -1,4 +1,4 @@
-import { useUserState } from '../../contexts/user-context/UserContext';
+import { useUserState } from '@contexts/user-context/UserContext';
 
 export function Board() {
   const userState = useUserState();

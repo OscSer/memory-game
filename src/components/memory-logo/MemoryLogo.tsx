@@ -1,4 +1,4 @@
-import logo from '../../assets/memory-logo.png';
+import logo from '@assets/memory-logo.png';
 import './MemoryLogo.css';
 
 export function MemoryLogo() {
