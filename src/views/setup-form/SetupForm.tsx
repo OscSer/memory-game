@@ -54,15 +54,17 @@ export function SetupForm() {
     [userDispatch, userState]
   );
 
-  const getCardOptions = useCallback(() => {
-    const values = Object.values(NumberOfCards);
-    const numbers = values.filter((value) => !Number.isNaN(Number(value)));
-    return numbers.map((number) => (
-      <option key={number} value={number}>
-        {number}
+  const getCardOptions = () => {
+    const values = Object.values(NumberOfCards)
+      .map((value) => Number(value))
+      .filter((value) => !Number.isNaN(value));
+
+    return values.map((value) => (
+      <option key={value} value={value}>
+        {value * 2}
       </option>
     ));
-  }, []);
+  };
 
   return (
     <>

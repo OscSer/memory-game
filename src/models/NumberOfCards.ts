@@ -1,5 +1,5 @@
 export enum NumberOfCards {
-  Small = 10,
-  Medium = 20,
-  Large = 30,
+  Small = 6,
+  Medium = 9,
+  Large = 12,
 }

@@ -13,7 +13,7 @@ export function GameBoard() {
   const user = useUserState();
   const [cards, setCards] = useState<CardElement[]>([]);
   const comparingRef = useRef(false);
-  const { isLoading, data } = useGetCards(user.numberOfCards / 2);
+  const { isLoading, data } = useGetCards(user.numberOfCards);
   const selectedRef = useRef<CardElement[]>([]);
   const [counter, setCounter] = useState<CounterType>({
     successful: 0,
