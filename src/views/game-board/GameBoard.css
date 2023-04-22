@@ -4,9 +4,8 @@
   align-items: center;
 }
 
-.gameBoard__cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+@media only screen and (min-width: 768px) {
+  .gameBoard {
+    max-width: 900px;
+  }
 }

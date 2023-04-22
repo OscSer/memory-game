@@ -9,21 +9,19 @@ interface CardParams {
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-function Card({ card, onClick }: CardParams): JSX.Element {
+export function Card({ card, onClick }: CardParams): JSX.Element {
+  const visibleClass = card.show ? 'customCard--visible' : '';
+  const matchedClass = card.matched ? 'customCard--matched' : '';
+  const modifierClases = `${visibleClass}  ${matchedClass}`;
+
   return (
-    <div
-      className="memoryCard"
+    <img
+      className={`customCard ${modifierClases}`}
+      src={card.show ? card.url : pattern}
+      alt={card.show ? card.title : 'card face down'}
       onClick={onClick}
-      role="button"
       aria-hidden="true"
-    >
-      {card.show ? (
-        <img src={card.url} alt={card.title} draggable="false" />
-      ) : (
-        <img src={pattern} alt="card face down" draggable="false" />
-      )}
-    </div>
+      draggable="false"
+    />
   );
 }
-
-export const MemoizedCard = React.memo(Card);
