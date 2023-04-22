@@ -2,10 +2,45 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 15px;
+}
+
+.gameBoard__restart {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  cursor: pointer;
+  color: #757575;
+}
+
+.gameBoard__restart:hover {
+  color: #424242;
+}
+
+.gameBoard__restart svg {
+  margin: 2px 5px 0 0;
+}
+
+.gameBoard__counters {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+@media only screen and (min-width: 600px) {
+  .gameBoard__counters {
+    gap: 15px;
+  }
 }
 
 @media only screen and (min-width: 768px) {
   .gameBoard {
     max-width: 900px;
+    margin-top: 40px;
+  }
+
+  .gameBoard__counters {
+    gap: 20px;
   }
 }
