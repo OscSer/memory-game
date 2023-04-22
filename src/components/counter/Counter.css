@@ -1,0 +1,30 @@
+.counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+}
+
+.counter.card-body {
+  padding: 10px;
+}
+
+.counter__value {
+  font-size: 30px;
+}
+
+.counter__label {
+  color: #616161;
+}
+
+@media only screen and (min-width: 600px) {
+  .counter {
+    width: 115px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .counter {
+    width: 130px;
+  }
+}
