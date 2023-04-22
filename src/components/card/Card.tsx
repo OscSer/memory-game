@@ -15,13 +15,25 @@ export function Card({ card, onClick }: CardParams): JSX.Element {
   const modifierClases = `${visibleClass}  ${matchedClass}`;
 
   return (
-    <img
-      className={`customCard ${modifierClases}`}
-      src={card.show ? card.url : pattern}
-      alt={card.show ? card.title : 'card face down'}
-      onClick={onClick}
-      aria-hidden="true"
-      draggable="false"
-    />
+    <>
+      <img
+        hidden={!card.show}
+        className={`customCard ${modifierClases}`}
+        src={card.url}
+        alt={card.title}
+        onClick={onClick}
+        aria-hidden="true"
+        draggable="false"
+      />
+      <img
+        hidden={card.show}
+        className={`customCard ${modifierClases}`}
+        src={pattern}
+        alt="card face down"
+        onClick={onClick}
+        aria-hidden="true"
+        draggable="false"
+      />
+    </>
   );
 }
