@@ -11,7 +11,12 @@ interface CardParams {
 
 function Card({ card, onClick }: CardParams): JSX.Element {
   return (
-    <div className="Card" onClick={onClick} role="button" aria-hidden="true">
+    <div
+      className="memoryCard"
+      onClick={onClick}
+      role="button"
+      aria-hidden="true"
+    >
       {card.show ? (
         <img src={card.url} alt={card.title} draggable="false" />
       ) : (

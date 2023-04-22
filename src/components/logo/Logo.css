@@ -1,8 +1,8 @@
-.memoryLogo {
+.logo {
   font-size: 40px;
 }
 
-.memoryLogo__img {
+.logo__img {
   aspect-ratio: auto;
   width: 150px;
   margin: 0 25px 60px 0;

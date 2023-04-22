@@ -43,7 +43,7 @@ export function GameBoard() {
   };
 
   const successfulMatch = () => {
-    setCounter((prev) => ({ ...prev, correct: prev.successful + 1 }));
+    setCounter((prev) => ({ ...prev, successful: prev.successful + 1 }));
     setMatchedCards(selectedRef.current);
     comparingRef.current = false;
     selectedRef.current = [];
@@ -52,7 +52,7 @@ export function GameBoard() {
   const unsuccessfulMatch = () => {
     setCounter((prev) => ({
       ...prev,
-      incorrect: prev.failed + 1,
+      failed: prev.failed + 1,
     }));
     setVisibility(selectedRef.current, false);
     comparingRef.current = false;
@@ -80,12 +80,12 @@ export function GameBoard() {
   };
 
   return (
-    <div className="GameBoard">
+    <div className="gameBoard">
       <div>{user.nickname}</div>
       <div>
         {counter.successful} / {counter.failed}
       </div>
-      <div className="GameBoard__Cards">
+      <div className="gameBoard__cards">
         {cards.map((card) => (
           <MemoizedCard
             key={card.key}

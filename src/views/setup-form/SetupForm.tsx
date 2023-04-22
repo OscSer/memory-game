@@ -9,7 +9,7 @@ import {
   useUserDispatch,
   useUserState,
 } from '@contexts/user-context/UserContext';
-import { MemoryLogo } from '@components/memory-logo/MemoryLogo';
+import { Logo } from '@components/logo/Logo';
 import { NumberOfCards } from '@models/NumberOfCards';
 import { setUserState } from '@services/storage-service/LocalStorageService';
 
@@ -66,7 +66,7 @@ export function SetupForm() {
 
   return (
     <>
-      <MemoryLogo />
+      <Logo />
       <Form
         noValidate
         validated={validated}
