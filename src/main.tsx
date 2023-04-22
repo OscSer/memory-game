@@ -1,11 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {
-  Navigate,
-  RouterProvider,
-  createBrowserRouter,
-} from 'react-router-dom';
+import { Navigate, RouterProvider, createHashRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import './main.css';
@@ -15,7 +11,7 @@ import { GameBoard } from '@views/game-board/GameBoard';
 
 const queryClient = new QueryClient();
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   { path: '/', element: <SetupForm /> },
   { path: 'board', element: <GameBoard /> },
   { path: '*', element: <Navigate to="/" replace /> },
