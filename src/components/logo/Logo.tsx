@@ -5,7 +5,7 @@ export function Logo() {
   return (
     <div className="logo">
       <img src={logo} alt="Memory Logo" className="logo__img" />
-      Memory
+      <div className="logo__text">Memory</div>
     </div>
   );
 }

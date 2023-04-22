@@ -67,42 +67,36 @@ export function SetupForm() {
   };
 
   return (
-    <>
+    <Form
+      noValidate
+      validated={validated}
+      onSubmit={handleSubmit}
+      className="setupForm"
+    >
       <Logo />
-      <Form
-        noValidate
-        validated={validated}
-        onSubmit={handleSubmit}
-        className="setupForm"
-      >
-        <FloatingLabel controlId="nickname" label="Nickname" className="mb-3">
-          <Form.Control
-            required
-            type="text"
-            placeholder="Nickname"
-            autoComplete="off"
-            value={userState.nickname}
-            onChange={onChangeNickname}
-          />
-          <Form.Control.Feedback type="invalid">
-            Please provide a nickname.
-          </Form.Control.Feedback>
-        </FloatingLabel>
+      <FloatingLabel controlId="nickname" label="Nickname" className="mb-3">
+        <Form.Control
+          required
+          type="text"
+          placeholder="Nickname"
+          autoComplete="off"
+          value={userState.nickname}
+          onChange={onChangeNickname}
+        />
+        <Form.Control.Feedback type="invalid">
+          Please provide a nickname.
+        </Form.Control.Feedback>
+      </FloatingLabel>
 
-        <FloatingLabel
-          controlId="cards"
-          label="Number of cards"
-          className="mb-3"
-        >
-          <Form.Select value={userState.numberOfCards} onChange={onChangeCards}>
-            {getCardOptions()}
-          </Form.Select>
-        </FloatingLabel>
+      <FloatingLabel controlId="cards" label="Number of cards" className="mb-3">
+        <Form.Select value={userState.numberOfCards} onChange={onChangeCards}>
+          {getCardOptions()}
+        </Form.Select>
+      </FloatingLabel>
 
-        <Button type="submit" variant="primary">
-          Start
-        </Button>
-      </Form>
-    </>
+      <Button type="submit" variant="primary">
+        Start
+      </Button>
+    </Form>
   );
 }

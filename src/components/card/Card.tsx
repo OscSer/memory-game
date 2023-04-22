@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Card.css';
-import pattern from '@assets/card-pattern.jpg';
+import pattern from '@assets/card-pattern.jpeg';
 import { CardElement } from '@models/CardElement';
 
 interface CardParams {

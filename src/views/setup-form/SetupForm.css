@@ -1,5 +1,16 @@
 .setupForm {
   display: flex;
   flex-direction: column;
-  width: 250px;
+  align-items: center;
+  padding-top: 25%;
+}
+
+.setupForm input,
+.setupForm select {
+  width: 200px;
+}
+
+.setupForm button {
+  width: 100px;
+  margin-top: 10px;
 }
