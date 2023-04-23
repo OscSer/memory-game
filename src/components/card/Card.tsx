@@ -1,15 +1,14 @@
-import React from 'react';
-
 import './Card.css';
 import pattern from '@assets/card-pattern.jpeg';
 import { CardElement } from '@models/CardElement';
+import { FocusableWrapper } from '@components/focusable-wrapper/FocusableWrapper';
 
-interface CardParams {
+interface Props {
   card: CardElement;
-  onClick: (event: React.MouseEvent<HTMLDivElement>) => void;
+  callback: () => void;
 }
 
-export function Card({ card, onClick }: CardParams): JSX.Element {
+export function Card({ card, callback }: Props): JSX.Element {
   const visibleClass = card.show ? 'customCard--visible' : '';
   const matchedClass = card.matched ? 'customCard--matched' : '';
   const modifierClases = `${visibleClass}  ${matchedClass}`;
@@ -18,22 +17,23 @@ export function Card({ card, onClick }: CardParams): JSX.Element {
     <>
       <img
         hidden={!card.show}
+        aria-hidden={!card.show}
+        data-testid="front-card"
         className={`customCard ${modifierClases}`}
         src={card.url}
         alt={card.title}
-        onClick={onClick}
-        aria-hidden="true"
         draggable="false"
       />
-      <img
-        hidden={card.show}
-        className={`customCard ${modifierClases}`}
-        src={pattern}
-        alt="card face down"
-        onClick={onClick}
-        aria-hidden="true"
-        draggable="false"
-      />
+
+      <FocusableWrapper callback={callback} hidden={card.show}>
+        <img
+          data-testid="back-card"
+          className="customCard"
+          src={pattern}
+          alt="card face down"
+          draggable="false"
+        />
+      </FocusableWrapper>
     </>
   );
 }

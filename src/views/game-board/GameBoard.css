@@ -9,9 +9,9 @@
 .gameBoard__restart {
   display: flex;
   align-items: center;
+  margin: 0;
   font-size: 18px;
-  cursor: pointer;
-  color: #757575;
+  color: #616161;
 }
 
 .gameBoard__restart:hover {

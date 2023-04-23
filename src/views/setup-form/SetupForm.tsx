@@ -77,6 +77,7 @@ export function SetupForm() {
       <FloatingLabel controlId="nickname" label="Nickname" className="mb-3">
         <Form.Control
           required
+          aria-required
           type="text"
           placeholder="Nickname"
           autoComplete="off"

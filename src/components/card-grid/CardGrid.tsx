@@ -59,7 +59,7 @@ export function CardGrid({ data, setCounter }: CardGridParams) {
     }
   };
 
-  const handleClick = (card: CardElement) => {
+  const handleCallback = (card: CardElement) => {
     if (card.matched || card.selected || isComparingRef.current) return;
     selectedRef.current.push(card);
     updateCards([card], { show: true, selected: true });
@@ -67,9 +67,13 @@ export function CardGrid({ data, setCounter }: CardGridParams) {
   };
 
   return (
-    <div className="cardGrid">
+    <div className="cardGrid" data-testid="card-grid">
       {cardElements.map((card) => (
-        <Card key={card.key} card={card} onClick={() => handleClick(card)} />
+        <Card
+          key={card.key}
+          card={card}
+          callback={() => handleCallback(card)}
+        />
       ))}
     </div>
   );

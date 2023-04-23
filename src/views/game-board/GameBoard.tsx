@@ -10,6 +10,7 @@ import { Loading } from '@components/loading/Loading';
 import { CardGrid } from '@components/card-grid/CardGrid';
 import { CustomAlert } from '@components/alert/CustomAlert';
 import { Counter } from '@components/counter/Counter';
+import { FocusableWrapper } from '@components/focusable-wrapper/FocusableWrapper';
 
 export function GameBoard() {
   const navigate = useNavigate();
@@ -47,9 +48,11 @@ export function GameBoard() {
 
   return (
     <div className="gameBoard">
-      <div className="gameBoard__restart" onClick={restart} aria-hidden="true">
-        <ArrowClockwise /> restart game
-      </div>
+      <FocusableWrapper callback={restart}>
+        <p className="gameBoard__restart">
+          <ArrowClockwise /> Restart game
+        </p>
+      </FocusableWrapper>
 
       <div className="gameBoard__counters">
         <Counter label="Successful" value={counter.successful} />
