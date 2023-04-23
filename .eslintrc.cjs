@@ -17,7 +17,7 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
   },
-  ignorePatterns: ['vite.config.ts'],
+  ignorePatterns: ['vite.config.ts', 'jest.config.js', 'config/**/*'],
   plugins: ['react', '@typescript-eslint'],
   rules: {
     'react/react-in-jsx-scope': 0,

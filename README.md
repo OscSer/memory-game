@@ -26,6 +26,14 @@ Run the game
   npm run dev
 ```
 
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  npm run test
+```
+
 ## Deployment
 
 GitHub Pages is used to deploy the project. To deploy run
