@@ -3,7 +3,7 @@ import './Loading.css';
 
 export function Loading() {
   return (
-    <div className="loading">
+    <div className="loading" data-testid="loading">
       <Spinner animation="border" variant="primary" />
     </div>
   );

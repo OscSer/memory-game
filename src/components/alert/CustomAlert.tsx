@@ -8,7 +8,12 @@ type Props = {
 
 export function CustomAlert({ variant, body, show }: Props) {
   return (
-    <Alert show={show} variant={variant} style={{ marginBottom: 20 }}>
+    <Alert
+      data-testid="custom-alert"
+      show={show}
+      variant={variant}
+      style={{ marginBottom: 20 }}
+    >
       {body}
     </Alert>
   );
